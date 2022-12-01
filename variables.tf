@@ -32,6 +32,6 @@ variable "node_groups" {
   default     = 3
 }
 variable "bucketname" {
-  default     = "my-test-bucket"
+  default     = "atestbucket0210"
   description = "bucket name for the app"
 }
