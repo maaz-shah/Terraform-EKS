@@ -40,7 +40,7 @@ spec:
     spec:
       containers:
       - name: "myapp"
-        image: mazishah/python-enumrate-api:0.1.1
+        image: mazishah/python-enumrate-api:0.1.2
         imagePullPolicy: Always
         ports:
         - containerPort: 5000
