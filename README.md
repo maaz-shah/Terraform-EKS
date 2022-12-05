@@ -25,7 +25,19 @@ terraform plan && terraform apply
 
 ![Visual](./visual.png)
 
-## FAQ
+# Monitoring
+
+## Install Prometheus community using helm
+```
+helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+
+helm repo add stable https://charts.helm.sh/stable
+
+helm install monitoring prometheus-community/kube-prometheus-stack
+```
+
+
+# Known issues
 1. Error creating Cluster
 ```
 Error: error creating EKS Cluster (my-cluster): UnsupportedAvailabilityZoneException: Cannot create cluster 'my-cluster' because us-west-1b, the targeted availability zone, does not currently have sufficient capacity to support the cluster. Retry and choose from these availability zones: us-west-1a, us-west-1c
