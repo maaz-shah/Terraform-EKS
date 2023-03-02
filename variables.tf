@@ -35,3 +35,14 @@ variable "bucketname" {
   default     = "atestbucket0210"
   description = "bucket name for the app"
 }
+
+variable "secret_arn" {
+  #default     = "arn:aws:secretsmanager:eu-central-1:12345567:secret:eks/service/*"
+  # default     = "arn:aws:secretsmanager:{{REGION}}:{{accountNumber}}:secret:eks/service/*"
+  description = "secrets ARN"
+}
+
+variable "srvaccount_namespace" {
+  type = list
+  default = ["staging", "development", "production"]
+}

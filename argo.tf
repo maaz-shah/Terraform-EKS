@@ -1,35 +1,14 @@
-data "kubectl_file_documents" "namespace" {
-    content = file("manifests/argocd/namespace.yaml")
-} 
+resource "helm_release" "argocd" {
+  name  = "argocd"
 
-data "kubectl_file_documents" "argocd" {
-    content = file("manifests/argocd/install.yaml")
-}
+  repository       = "https://argoproj.github.io/argo-helm"
+  chart            = "argo-cd"
+  namespace        = "argocd"
+  version          = "5.22.1"
+  create_namespace = true
 
-resource "kubectl_manifest" "namespace" {
-    count     = length(data.kubectl_file_documents.namespace.documents)
-    yaml_body = element(data.kubectl_file_documents.namespace.documents, count.index)
-    override_namespace = "argocd"
-}
-
-resource "kubectl_manifest" "argocd" {
-    depends_on = [
-      kubectl_manifest.namespace,
-    ]
-    count     = length(data.kubectl_file_documents.argocd.documents)
-    yaml_body = element(data.kubectl_file_documents.argocd.documents, count.index)
-    override_namespace = "argocd"
-}
-
-data "kubectl_file_documents" "myapp" {
-    content = file("manifests/argocd/myapp.yaml")
-}
-
-resource "kubectl_manifest" "myapp" {
-    depends_on = [
-      kubectl_manifest.argocd,
-    ]
-    count     = length(data.kubectl_file_documents.myapp.documents)
-    yaml_body = element(data.kubectl_file_documents.myapp.documents, count.index)
-    override_namespace = "argocd"
+# If something needs to be defined at the time of install
+  values = [
+    file("manifest/myapp/app.yaml")
+  ]
 }
