@@ -35,7 +35,8 @@ helm repo add stable https://charts.helm.sh/stable
 
 helm install monitoring prometheus-community/kube-prometheus-stack
 ```
-
+# AWS-Secrets-Manager
+Terraform also installs the CSI driver that integrates the EKS cluster to AWS secrets manager, just create a secret in aws secret manager and provide ARN in `variables` which then can be used as Environemnt variables or mountpoints, more details [here](https://docs.aws.amazon.com/secretsmanager/latest/userguide/integrating_csi_driver.html)
 
 # Known issues
 1. Error creating Cluster
